@@ -18,44 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef KEYMAP_COMMON_H
 #define KEYMAP_COMMON_H
 
-#include "keycode.h"
-#include "action.h"
+#include "quantum.h"
 
 #define KEYMAP( \
-  K05, K25, K35, K45, K55, K06, KA6, KA7, K07, KB5, KC5, KD5, KE5, KD1, KE1, KE2, \
-  K04, K14, K24, K34, K44, K54, K16, KB6, KB7, K17, KA4, KB4, KC4, KE4,      KD0, \
-  K03, K13, K23, K33, K43, K53, K26, KC6, KC7, K27, KA3, KB3, KC3, KD3,      K67, \
-  K02, K12, K22, K32, K42, K52, K36, KD6, KD7, K37, KA2, KB2, KD2,           KE0, \
-  K01, K11, K21, K31, K41, K51, K46, KE6, KE7, K47, KA1, KB1,           K86, K77, \
-  K00, K10, K20,           K56,                     K57, KB0, KC0, K66, K76, K96  \
+  K00, K10, K20, K13, K17, K1B, K1C, K30, K0D, K40, K2D, K0B, K0C, K1A, K0E,\
+   K11, K01, K02, K03, K04, K14, K15, K05, K06, K07, K08, K18, K16,  K2A,   \
+    K12, K21, K22, K23, K24, K34, K35, K25, K26, K27, K28, K38,   K2B,      \
+    K19,   K41, K42, K33, K3B, K1D, K36, K45, K4A, K4B, K37,    K4D,    K3D,\
+  K09,   K0A,   K39,           K3A,                 K31,   K32,   K4C,   K29\
 ){ \
-  { K00, K10,   K20, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KB0, KC0,   KD0,   KE0   }, \
-  { K01, K11,   K21, K31,   K41,   K51,   KC_NO, KC_NO, KC_NO, KC_NO, KA1,   KB1, KC_NO, KD1,   KE1   }, \
-  { K02, K12,   K22, K32,   K42,   K52,   KC_NO, KC_NO, KC_NO, KC_NO, KA2,   KB2, KC_NO, KD2,   KE2   }, \
-  { K03, K13,   K23, K33,   K43,   K53,   KC_NO, KC_NO, KC_NO, KC_NO, KA3,   KB3, KC3,   KD3,   KC_NO }, \
-  { K04, K14,   K24, K34,   K44,   K54,   KC_NO, KC_NO, KC_NO, KC_NO, KA4,   KB4, KC4,   KC_NO, KE4   }, \
-  { K05, KC_NO, K25, K35,   K45,   K55,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KB5, KC5,   KD5,   KE5   }, \
-  { K06, K16,   K26, K36,   K46,   K56,   K66,   K76,   K86,   K96,   KA6,   KB6, KC6,   KD6,   KE6   }, \
-  { K07, K17,   K27, K37,   K47,   K57,   K67,   K77,   KC_NO, KC_NO, KA7,   KB7, KC7,   KD7,   KE7   } \
-}
-
-#define KC_KEYMAP( \
-    K05, K25, K35, K45, K55, K06, KA6, KA7, K07, KB5, KC5, KD5, KE5, KD1, KE1, KE2, \
-    K16, K17, K27, K44, KE6, K46, K56, KB6, K67, K77, KD2, K86, K66, KA1,      KD0, \
-    K11, K13, K23, K33, K43, K41, K51, KC6, KC7, K02, KE7, KB3, KC3, KA2,      KB7, \
-    K21, K12, K22, K32, K42, KD6, K36, K52, KD7, K31, KD3, KB2, KA4,           KE0, \
-    K01, K14, K24, K34, K47, K26, K04, K54, K37, K53, KB1, KE4,           KB4, K03, \
-    K00, K10, K20,           KA3,                     K57, KB0, KC0, KC4, K76, K96  \
-) \
-{ \
-    { KC_##K00, KC_##K10, KC_##K20, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##KB0, KC_##KC0, KC_##KD0, KC_##KE0 }, \
-    { KC_##K01, KC_##K11, KC_##K21, KC_##K31, KC_##K41, KC_##K51, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##KA1, KC_##KB1, KC_NO,    KC_##KD1, KC_##KE1 }, \
-    { KC_##K02, KC_##K12, KC_##K22, KC_##K32, KC_##K42, KC_##K52, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##KA2, KC_##KB2, KC_NO,    KC_##KD2, KC_##KE2 }, \
-    { KC_##K03, KC_##K13, KC_##K23, KC_##K33, KC_##K43, KC_##K53, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##KA3, KC_##KB3, KC_##KC3, KC_##KD3, KC_NO    }, \
-    { KC_##K04, KC_##K14, KC_##K24, KC_##K34, KC_##K44, KC_##K54, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##KA4, KC_##KB4, KC_##KC4, KC_NO,    KC_##KE4 }, \
-    { KC_##K05, KC_NO,    KC_##K25, KC_##K35, KC_##K45, KC_##K55, KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_##KB5, KC_##KC5, KC_##KD5, KC_##KE5 }, \
-    { KC_##K06, KC_##K16, KC_##K26, KC_##K36, KC_##K46, KC_##K56, KC_##K66, KC_##K76, KC_##K86, KC_##K96, KC_##KA6, KC_##KB6, KC_##KC6, KC_##KD6, KC_##KE6 }, \
-    { KC_##K07, KC_##K17, KC_##K27, KC_##K37, KC_##K47, KC_##K57, KC_##K67, KC_##K77, KC_NO,    KC_NO,    KC_##KA7, KC_##KB7, KC_##KC7, KC_##KD7, KC_##KE7 }  \
+  { K00, K01, K02, K03,   K04,   K05, K06, K07, K08, K09, K0A,   K0B,   K0C,   K0D, K0E}, \
+  { K10, K11, K12, K13,   K14,   K15, K16, K17, K18, K19, K1A,   K1B,   K1C,   K1D, KC_NO}, \
+  { K20, K21, K22, K23,   K24,   K25, K26, K27, K28, K29, K2A,   K2B,   KC_NO, K2D, KC_NO}, \
+  { K30, K31, K32, K33,   K34,   K35, K36, K37, K38, K39, K3A,   K3B,   KC_NO, K3D, KC_NO}, \
+  { K40, K41, K42, KC_NO, KC_NO, K45, K4A, K4B, K4C, K4D, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO}, \
 }
 
 #endif
