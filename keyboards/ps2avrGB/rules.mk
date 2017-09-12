@@ -35,7 +35,7 @@ COMMAND_ENABLE = yes
 OPT_DEFS = -DDEBUG_LEVEL=0
 OPT_DEFS += -DBOOTLOADER_SIZE=2048
 
-CUSTOM_MATRIX = yes
+CUSTOM_MATRIX = no
 SRC = matrix.c
 
 # programming options
